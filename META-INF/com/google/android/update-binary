@@ -7,7 +7,6 @@ ZIP=$3
 
 DEVICE=`getprop ro.product.device`
 BLOCKDEV="/dev/block/mmcblk0"
-PLATFORM="/dev/block/platform/msm_sdcc.1/by-name/"
 SGDISKBIN="/tmp/sbin/sgdisk"
 
 ui_print() {
@@ -50,9 +49,6 @@ safeRunCommand "$SGDISKBIN $BLOCKDEV --new 22:3801088:4587519"
 safeRunCommand "$SGDISKBIN $BLOCKDEV --change-name=22:cache"
 safeRunCommand "$SGDISKBIN $BLOCKDEV --new 23:4587520:30535646"
 safeRunCommand "$SGDISKBIN $BLOCKDEV --change-name=23:userdata"
-safeRunCommand "mke2fs -t ext4 ${PLATFORM}system"
-safeRunCommand "mke2fs -t ext4 ${PLATFORM}cache"
-safeRunCommand "mke2fs -t ext4 ${PLATFORM}userdata"
 
 ui_print "-Repartion Done."
 ui_print "-Reboot your device to recovery to apply new partition table."
